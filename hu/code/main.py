@@ -2,6 +2,7 @@ import cv2
 import sys
 import cap_init
 import logging
+import tool
 
 class ALL_INIT():
     def __init__(self):
@@ -10,7 +11,11 @@ class ALL_INIT():
 
     def start(self):
         self.frame = self.camera.read()
+        self.edges = tool.img_preprocess(self.frame)
+        self.split = tool.channel_split(self.edges)
         cv2.imshow("frame", self.frame)
+        cv2.imshow("edges", self.edges)
+        cv2.imshow("edges", self.split)
         cv2.waitKey(1)
 
 
