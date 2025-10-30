@@ -11,11 +11,12 @@ class ALL_INIT():
 
     def start(self):
         self.frame = self.camera.read()
-        self.edges = tool.img_preprocess(self.frame)
-        self.split = tool.channel_split(self.edges)
+        self.warp_img = tool.img_preprocess(self.frame)
+        self.lane_img = tool.lane_multiple(self.warp_img)
+        self.lanes = tool.find_lane(self.lane_img,self.frame)
         cv2.imshow("frame", self.frame)
-        cv2.imshow("edges", self.edges)
-        cv2.imshow("edges", self.split)
+        cv2.imshow("edge", self.warp_img)
+        cv2.imshow("lane", self.lane_img)
         cv2.waitKey(1)
 
 
